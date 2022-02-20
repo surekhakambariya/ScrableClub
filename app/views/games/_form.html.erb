@@ -1,0 +1,39 @@
+<%= form_for @game do |form| %>
+    <% if @game.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@game.errors.count, "error") %> prohibited this @game from being saved:</h2>
+
+        <ul>
+        <% @game.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+        <%= form.label :title, for: "title" %>
+        <%= form.text_field :title, type: "title", class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+        <%= form.label :description, for: "description" %>
+        <%= form.text_area :description, type: "description", class: "form-control", rows: "3" %>
+    </div>
+    
+    <b>Participant Players:</b>
+    <ul>
+      <%= form.fields_for :participants do |participants_form| %>
+        <div class="form-group">
+            <%= participants_form.label :name, for: "name" %>
+            <%= participants_form.select :member_id, options_for_select(Member.all.collect {|c| [ c.full_name, c.id ] }), {}, { class: 'form-control', required: true} %>
+        <div>
+        <div class="form-group">
+            <%= participants_form.label :score, for: "score" %>
+            <%= participants_form.number_field :score, class: "form-control", required: true %>
+        </div>
+      <% end %>
+    </ul>
+    <div class="form-group">
+        <%= form.button :submit, class: 'btn btn-primary' %>
+    </div>
+<% end %>

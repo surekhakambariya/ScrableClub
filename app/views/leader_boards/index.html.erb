@@ -1,0 +1,19 @@
+<% if @top_score_members.blank? %>
+  <p>Does not have any users having more than 10 matches</p>
+<% else %>
+  <table>
+    <tr>
+      <td><strong>Rank</strong></td>
+      <td><strong>Member Name</strong></td>
+      <td><strong>Avg Score</strong></td>
+    </tr>
+    <% @top_score_members.each_with_index do |member, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= member.full_name %></td>
+        <td><%= avrage_score(member.participants) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<hr>

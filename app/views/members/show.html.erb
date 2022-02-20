@@ -1,0 +1,120 @@
+<h1>Member Details</h1><hr>
+<table>
+  <tr>
+    <td>
+      <strong>Full Name : </strong>
+    </td>
+    <td>
+      <%= @member.full_name %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Email : </strong>
+    </td>
+    <td>
+      <%= @member.email %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Mobile Number : </strong>
+    </td>
+    <td>
+      <%= @member.mobile_number %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Address : </strong>
+    </td>
+    <td>
+      <%= @member.address %>
+    </td>
+  </tr>
+</table>
+<hr>
+<% if @member.number_of_games.zero? %>
+  <table>
+    <tr>
+      <td>
+        <strong><%= @member.full_name %> game count : </strong>
+      </td>
+      <td>
+        0
+      </td>
+    </tr>
+  </table>
+<% else %>
+  <table>
+    <tr>
+      <td>
+        <strong><%= @member.full_name %> game count: </strong>
+      </td>
+      <td>
+        <%= @member.number_of_games %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Number of wins : </strong>
+      </td>
+      <td>
+        <%= win_games_count(@member.participants) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Number of losses : </strong>
+      </td>
+      <td>
+        <%= los_games_count(@member.participants) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Average score : </strong>
+      </td>
+      <td>
+        <%= avrage_score(@member.participants) %>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <table>
+    <tr>
+      <td>
+        <strong>Highest Score : </strong>
+      </td>
+      <td>
+        <%= @rank_details[:highest_score] %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Game Name : </strong>
+      </td>
+      <td>
+        <%= @rank_details[:game_name] %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Game Date : </strong>
+      </td>
+      <td>
+        <%= @rank_details[:game_time] %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong><%= @member.full_name %> Game Against : </strong>
+      </td>
+      <td>
+        <%= @rank_details[:another_player] %>
+      </td>
+    </tr>
+  </table>
+
+<% end %>
